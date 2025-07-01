@@ -13,7 +13,14 @@ const MODEL_NAME = 'gemini-2.5-flash-preview-04-17';
 const POLISHED_NOTE_MODEL_NAME = 'gemini-2.5-flash-lite-preview-06-17';
 const RECORDING_SEGMENT_MS = 30 * 1000; // 30 seconds
 
-const USER_CREDENTIALS: UserCredential[] = JSON.parse(process.env.VITE_USER_CREDENTIALS || '[]');
+// const USER_CREDENTIALS: UserCredential[] = JSON.parse(process.env.VITE_USER_CREDENTIALS || '[]');
+// const USER_CREDENTIALS = [
+//   { username: 'admin', password: 'password123' },
+//   { username: 'user', password: 'userpass' },
+//   // Add more credentials here
+// ];
+const USER_CREDENTIALS: UserCredential[] = JSON.parse(import.meta.env.VITE_USER_CREDENTIALS || '[]');
+
 
 interface UserCredential {
   username: string;
@@ -89,7 +96,7 @@ class VoiceNotesApp {
 
   constructor() {
     this.genAI = new GoogleGenAI({
-      apiKey: process.env.API_KEY!,
+      apiKey: import.meta.env.VITE_GEMINI_API_KEY!,
     });
     
     // Main UI elements
